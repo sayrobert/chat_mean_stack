@@ -6,6 +6,7 @@ Imports
 
     // Inner
     const AuthRouterClass = require('./auth/auth.routes');
+    const ChatRouterClass = require('./chat/chat.routes');
 //
 
 /*
@@ -17,6 +18,7 @@ Define routers
 
     // Child
     const authRouter = new AuthRouterClass();
+    const chatRouter = new ChatRouterClass();
 //
 
 /*
@@ -24,6 +26,7 @@ Define routes
 */
     mainRouter.use('/api', apiRouter);
     apiRouter.use('/auth', authRouter.init());
+    apiRouter.use('/chat', chatRouter.init());
 //
 
 /*
