@@ -3,7 +3,7 @@ Imports
 */
     const express = require('express');
     const chatRouter = express.Router({ mergeParams: true });
-    const { addchat } = require('./chat.controller');
+    const { addchat, listchat } = require('./chat.controller');
 
     const { checkFields } = require('../../services/request.checker');
     const { sendBodyError, sendFieldsError, sendApiSuccessResponse, sendApiErrorResponse } = require('../../services/server.response');
@@ -36,6 +36,11 @@ Routes definition
                 .catch( apiResponse => res.json(apiResponse) )
             });
 
+            chatRouter.get('/listchat', (req, res) => {
+                listchat(res.body)
+                .then( apiResponse => res.json(apiResponse) )
+                .catch( apiResponse => res.json(apiResponse) )
+            });
         };
 
         init(){
