@@ -62,8 +62,7 @@ Functions
                         token: user.generateJwt()
                     })
                 }
-            })
-            
+            })  
         })
     };
 //
