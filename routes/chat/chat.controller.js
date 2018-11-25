@@ -10,12 +10,12 @@ Functions
     const addchat = body => {
         // Save user
         return new Promise( (resolve, reject) => {
-            MessageModel.create(body, (error, newUser) => {
+            MessageModel.create(body, (error, message) => {
                 if(error){ // Mongo error
                     return reject(error)
                 }
                 else{ // User registrated
-                    return resolve(newUser);
+                    return resolve(message);
                 };
             });
         });
@@ -35,6 +35,19 @@ Functions
         });
     };
 
+    const deletechat = body => {
+        return new Promise( (resolve, reject) => {
+            MessageModel.remove({ _id: body.id }, (error, message) => {
+                if(error){ // Mongo error
+                    return reject(error)
+                }
+                else{ // User registrated
+                    return resolve(message);
+                };
+            });
+        });
+    };
+
 //
 
 /*
@@ -42,6 +55,7 @@ Export
 */
     module.exports = {
         addchat,
-        listchat
+        listchat,
+        deletechat
     }
 //
