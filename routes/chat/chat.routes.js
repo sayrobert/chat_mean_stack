@@ -47,7 +47,7 @@ Routes definition
                 if( typeof req.body === 'undefined' || req.body === null ) sendBodyError( res, 'No body data provided' );
 
                 // Vérifier les champs du body
-                const { miss, extra, ok } = checkFields(['id'], req.body);
+                const { miss, extra, ok } = checkFields(['id','user_id'], req.body);
                 
                 // Vérifier la variable ok est true
                 if( !ok ){ sendFieldsError( res, 'Bad fields provided', miss, extra ) }

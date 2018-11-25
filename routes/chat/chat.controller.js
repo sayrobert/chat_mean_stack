@@ -2,6 +2,7 @@
 Import
 */
     const MessageModel = require('../../models/chat.model');
+    const UserModel = require('../../models/user.model');
 //
 
 /*
@@ -28,7 +29,7 @@ Functions
                 if(error){ // Mongo error
                     return reject(error)
                 }
-                else{ // User registrated
+                else{ // Mongo ok list
                     return resolve(messages);
                 };
             });
@@ -37,12 +38,17 @@ Functions
 
     const deletechat = body => {
         return new Promise( (resolve, reject) => {
-            MessageModel.remove({ _id: body.id }, (error, message) => {
-                if(error){ // Mongo error
-                    return reject(error)
-                }
-                else{ // User registrated
-                    return resolve(message);
+            UserModel.findOne({ _id: body.user_id}, (error, user) => {
+                if(user){ // User exist
+                    // Delete message of the user
+                    MessageModel.remove({ _id: body.id, user_id: body.user_id }, (error, message) => {
+                        if(error){ // Mongo error
+                            return reject(error)
+                        }
+                        else{ // User registrated
+                            return resolve(message);
+                        };
+                    });
                 };
             });
         });
